@@ -20,6 +20,11 @@ class WeatherViewModel: ObservableObject {
     
     private let defaultCity = "Tulsa"
     
+    init() {
+        
+        fetchWeather(for: defaultCity)
+        
+    }
     
     func fetchWeather(for cityName: String) {
         

@@ -32,8 +32,8 @@ struct Current: Codable {
 }
 
 struct Day: Codable {
-    let max_temp_f: Double
-    let min_temp_f: Double
+    let maxtemp_f: Double
+    let mintemp_f: Double
     let condition: Condition
 }
 

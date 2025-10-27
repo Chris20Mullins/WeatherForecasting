@@ -8,18 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject private var viewModel = WeatherViewModel()
+    @State private var cityName: String = "Tulsa"
+    
+    
     var body: some View {
         
-             
+       
         VStack{
             Spacer()
             SearchHeaderView()
             CityNameView(city: "Tulsa", currentDate: "September 10, 2025")
             CurrentWeatherView()
-            ThreeDayForecastView()
-            ThreeDayForecastView()
-            ThreeDayForecastView()
-            
+            if let weather = viewModel.weatherResponse {
+                ThreeDayForecastView(forecast:  weather.forecast.forecastday)
+            } else {
+               Text("Loading Forecast....")
+            }
+        
             Spacer()
             
         }

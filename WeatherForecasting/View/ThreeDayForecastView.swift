@@ -8,13 +8,29 @@
 import SwiftUI
 
 struct ThreeDayForecastView: View {
+    
+    var forecast: [ForecastDay]
+    
     var body: some View {
+        
+        LazyVStack {
+            ForEach(forecast.prefix(3), id: \.date) { forecastDay in
+                dailyCell(forecastDay: forecastDay)
+            }
+        }
+        
+    }
+        
+        private func dailyCell(forecastDay: ForecastDay) -> some View {
+            
+        
+        
         HStack{
             Text("Day")
             Spacer()
-            Text("High : 98°F")
+            Text("High : \(Int(round(forecastDay.day.maxtemp_f)))F")
             Spacer()
-            Text("Low : 70°F")
+            Text("Low : \(Int(round(forecastDay.day.mintemp_f)))F")
             Spacer()
             Image(systemName: "sun.max.fill")
         }
@@ -29,6 +45,6 @@ struct ThreeDayForecastView: View {
         .shadow(color: Color.red.opacity(0.2), radius: 2, x: 2, y: 2)
     }
 }
-#Preview {
-    ThreeDayForecastView()
-}
+//#Preview {
+//    ThreeDayForecastView()
+//}
