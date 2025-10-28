@@ -18,9 +18,20 @@ struct ContentView: View {
        
         VStack{
             Spacer()
-            SearchHeaderView()
-            CityNameView(city: "Tulsa", currentDate: "September 10, 2025")
-            CurrentWeatherView()
+            SearchHeaderView(fetchWeather: { cityName in
+            viewModel.fetchWeather(for: cityName)
+            })
+            
+            if let city = viewModel.weatherResponse?.location.name {
+                CityNameView(city: city)
+            }
+           if let errorMessasge = viewModel.errorMessage {
+                Text(errorMessasge)
+                   .foregroundColor(.red)
+                   .padding()
+            } else {
+               CurrentWeatherView(weather: viewModel.weatherResponse)
+           }
             if let weather = viewModel.weatherResponse {
                 ThreeDayForecastView(forecast:  weather.forecast.forecastday)
             } else {

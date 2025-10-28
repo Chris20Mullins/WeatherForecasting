@@ -26,13 +26,13 @@ struct ThreeDayForecastView: View {
         
         
         HStack{
-            Text("Day")
+            Text(dayOfWeek(for: forecastDay.date))
             Spacer()
             Text("High : \(Int(round(forecastDay.day.maxtemp_f)))F")
             Spacer()
             Text("Low : \(Int(round(forecastDay.day.mintemp_f)))F")
             Spacer()
-            Image(systemName: "sun.max.fill")
+            Image(systemName: weatherIconViewModel(for: forecastDay.day.condition.code))
         }
         
         .foregroundColor(.black)
@@ -44,7 +44,18 @@ struct ThreeDayForecastView: View {
         .shadow(color: Color.black.opacity(0.1), radius: 2, x: -2, y: -2)
         .shadow(color: Color.red.opacity(0.2), radius: 2, x: 2, y: 2)
     }
-}
+    //Converts a date string format ("yyyy-MM-dd") to the corresponding day of the week ("EEEE").
+    private func dayOfWeek(for dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let date = dateFormatter.date(from: dateString) else {
+            return "Unknown"
+        }
+        dateFormatter.dateFormat = "EEEE"
+        return dateFormatter.string(from: date)
+        }
+    }
+
 //#Preview {
 //    ThreeDayForecastView()
 //}

@@ -10,12 +10,18 @@ import SwiftUI
 struct CityNameView: View {
     var city: String
         var currentDate: String
+    
+    init(city: String) {
+        self.city = city
+        self.currentDate = DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .none)
+    }
+    
     var body: some View {
         VStack {
-                    Text("Tulsa")
+                    Text(city)
                         .font(.largeTitle)
                         .bold(true)
-                    Text("September 10th, 2025")
+                    Text(currentDate)
                         .font(.title2)
                         
                         
@@ -26,6 +32,6 @@ struct CityNameView: View {
     }
 }
 
-#Preview {
-    CityNameView(city: "Tulsa", currentDate: "September 10th, 2025")
-}
+//#Preview {
+//    CityNameView(city: "Tulsa", currentDate: "September 10th, 2025")
+//}
